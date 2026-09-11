@@ -1,0 +1,16 @@
+services:
+  retail-platform:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+
+    env_file:
+      - ../environment_variable.env
+
+    volumes:
+      - ../logs:/app/logs
+      - ../data/Original_data:/app/data/original_data
+      - ../data/batch:/app/data/batch
+      - ../data/reference:/app/data/reference
+
+    restart: "no"

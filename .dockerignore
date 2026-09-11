@@ -1,0 +1,46 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Git
+.git/
+.gitignore
+
+# VS Code
+.vscode/
+
+# Fabric / workspace metadata
+.vfscache/
+.vfsmeta/
+
+# Environment files and secrets
+.env
+environment_variable.env
+
+# Logs
+logs/
+*.log
+
+# Local data
+data/
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Docker
+docker-compose.override.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Historical material
+Archive/
+
+# Local metadata
+.work-folder-info

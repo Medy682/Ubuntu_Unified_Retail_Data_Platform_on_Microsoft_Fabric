@@ -1,0 +1,87 @@
+# ============================================================
+# Secrets and Environmental Configuration
+# ============================================================
+
+environment_variable.env
+.env
+
+# Keep the safe environment template in GitHub
+!.env.example
+
+# Local scripts containing machine-specific configuration
+run_pipeline.bat
+
+# Private keys / certificates
+*.p8
+*.pem
+*.key
+
+
+# ============================================================
+# Python Virtual Environments and Cache Files
+# ============================================================
+
+venv/
+.venv/
+
+__pycache__/
+*.py[cod]
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+
+# ============================================================
+# Jupyter / Notebook Checkpoints
+# ============================================================
+
+.ipynb_checkpoints/
+
+
+# ============================================================
+# Generated / Local Test Data
+# ============================================================
+
+# Generated batch datasets
+data/batch/
+
+# Generated reference datasets
+data/reference/
+
+# Docker reproducibility test outputs
+docker-test-data/
+
+
+# ============================================================
+# Archived / Historical Project Material
+# ============================================================
+
+Archive/
+
+# ============================================================
+# Tests ( unit & integration)
+# ============================================================
+
+tests/
+
+# ============================================================
+# Local IDE / OS Files
+# ============================================================
+
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# Fabric / Workspace Local Metadata
+# ============================================================
+
+.vfscache/
+.vfsmeta/
+.stubs/
+.work-folder-info
+logs/
+
+# Fabric / Spark session artifacts
+58e58f37-b75b-4c9a-8d28-ec479ed0805a/
