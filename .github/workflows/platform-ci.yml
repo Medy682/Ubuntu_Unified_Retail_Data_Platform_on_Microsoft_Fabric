@@ -1,4 +1,4 @@
-name: Ubuntu Unified Retail Data Platform
+name: Ubuntu Unified Retail Data Platform CI
 
 on:
   push:
