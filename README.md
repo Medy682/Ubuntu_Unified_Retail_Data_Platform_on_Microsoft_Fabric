@@ -1,4 +1,13 @@
-# Ubuntu Unified Retail Data Platform
+
+# 💎 [![Ubuntu Unified Retail Data Platform](https://github.com/Medy682/Ubuntu_Unified_Retail_Data_Platform_on_Microsoft_Fabric/actions/workflows/platform-ci.yml/badge.svg)](https://github.com/Medy682/Ubuntu_Unified_Retail_Data_Platform_on_Microsoft_Fabric/actions/workflows/platform-ci.yml)
+---
+
+Author: Kidima Medy Masuka 
+
+Date: 2026
+
+---
+
 
 > **An end-to-end simulated enterprise data engineering platform built with Microsoft Fabric, Python, PySpark and SQL to integrate heterogeneous retail, e-commerce, operational and real-time data sources into a trusted analytics environment.**
 
@@ -838,24 +847,30 @@ Sensitive credentials should not be stored directly in notebooks, source code or
 
 ---
 
-# 18. CI/CD
+# 18. CI
 
-The project incorporates source control and deployment practices where applicable.
+The project incorporates source control and automated validation practices using Git and GitHub Actions.
 
-The repository includes GitHub Actions workflows for:
+The repository includes a unified GitHub Actions CI workflow for:
 
 * Continuous Integration
-* Continuous Deployment
-* Security scanning
+* Dependency validation
+* Dependency vulnerability scanning
+* Secret detection
+
+The CI workflow automatically runs on pushes and pull requests targeting the `main` branch and can also be triggered manually.
 
 The objective is to demonstrate:
 
 * Version control
 * Automated validation
-* Data testing
+* Dependency management
 * Security checks
-* Reproducible transformations
-* Controlled deployment
+* Reproducible development practices
+
+Fabric artefacts, including notebooks, pipelines, Lakehouse, Warehouse, and Eventhouse components, are maintained as part of the project repository and developed within Microsoft Fabric.
+
+**Continuous Deployment (CD) is not currently implemented.** The project does not currently automate the deployment or promotion of Fabric artefacts from GitHub to a target Fabric workspace. This represents a potential future extension of the platform's CI/CD architecture.
 
 ---
 
@@ -1283,44 +1298,3 @@ This project therefore demonstrates not only individual technology skills, but t
                            │
                            ▼
                         POWER BI
-
-
-
-## NB. 🧪 Testing and Data Quality
-
-The platform's transformation notebooks were developed, executed, and validated in Microsoft Fabric using PySpark. Data-quality validation is embedded directly within the transformation workflows to ensure data integrity throughout the pipeline.
-
-Validation includes:
-
-- Null and missing value checks
-- Duplicate record detection
-- Data-type validation
-- Referential integrity and foreign-key validation
-- Business-rule validation
-- Row-count and record-level consistency checks
-- Post-write validation of transformed Silver data
-
-Automated **unit and integration testing frameworks** were considered as an additional software-engineering practice. However, given the extensive validation already implemented and executed within the Fabric PySpark transformation workflows, a separate automated testing framework was not included in the current implementation.
-
-This keeps the testing approach proportional to the project's architecture while ensuring that the data transformations and resulting datasets are thoroughly validated.
-
-## NB. 🔄 Reproducible Data Generation with Docker
-
-Docker is used to make the project's Python data-generation environment reproducible and portable. The generated batch and reference datasets are intentionally excluded from version control; instead, the repository contains the original source data, Python generation scripts, Docker configuration, and dependencies required to recreate them.
-
-An engineer can clone the repository, build the Docker environment using Docker Compose, and execute the same generation scripts to reproduce the datasets locally
-
-
-# Build the Docker environment
-docker compose -f docker/docker-compose.yml build
-
-# Generate batch datasets
-docker compose -f docker/docker-compose.yml run --rm retail-platform python scripts/generate_sample_datasets.py
-
-# Generate reference datasets
-docker compose -f docker/docker-compose.yml run --rm retail-platform python scripts/generate_reference_data.py
-
-
-The resulting 8 batch CSV files and 5 reference CSV files can then be ingested and used on the engineer's platform of choice, including Microsoft Fabric, Snowflake, Databricks, or another data platform.
-
-Reproducibility principle: The repository provides the code and environment required to regenerate the data rather than relying on pre-generated datasets.
