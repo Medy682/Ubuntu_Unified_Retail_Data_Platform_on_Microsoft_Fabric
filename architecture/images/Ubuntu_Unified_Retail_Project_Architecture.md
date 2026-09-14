@@ -409,4 +409,3 @@ The same streaming events are also routed directly from Eventstream to:
 
 Together, these paths form the platform's unified batch and streaming architecture, with the Fabric Lakehouse providing the central medallion data-engineering environment.
 
-This architecture reflects the implementation completed during Week 7 and provides the foundation for the Week 8 production-readiness work.
