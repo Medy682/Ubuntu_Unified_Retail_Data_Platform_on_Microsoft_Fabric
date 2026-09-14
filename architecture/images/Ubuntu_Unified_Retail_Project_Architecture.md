@@ -2,15 +2,22 @@
 
 ## 1. High-Level Architecture
 
+The following diagram represents the implemented project architecture, separating the **batch and streaming data paths** from the **project engineering and development tooling**.
+
+> **Note:** The diagram is intentionally larger than the surrounding diagrams. If your Markdown viewer supports Mermaid overflow scrolling, the architecture can be viewed using the horizontal and vertical scroll bars rather than requiring excessive zooming.
+
+<div style="overflow:auto; width:100%; max-height:900px; border:1px solid #ddd; padding:10px;">
+
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "20px"}, "flowchart": {"nodeSpacing": 50, "rankSpacing": 70}}}%%
 flowchart TB
 
     %% =========================
-    %% BATCH INGESTION
+    %% BATCH DATA ENGINEERING
     %% =========================
     subgraph BATCH["BATCH DATA ENGINEERING"]
         A["Public + Synthetic Retail Datasets<br/>CSV / Reference Data"]
-        B["Microsoft Fabric Data Factory<br/>Copy Jobs / Dataflows / Pipelines"]
+        B["Manual Upload to Fabric Lakehouse<br/>Source CSV / Reference Data"]
         C["Bronze (Batch)<br/>Fabric Lakehouse • Delta Tables<br/>PySpark lightweight preprocessing where required"]
         D["Silver (Batch)<br/>Fabric Lakehouse • Delta Tables<br/>PySpark cleansing, validation, standardization & business rules"]
         E["Batch Gold<br/>SQL Dimensional Modelling<br/>Facts • Dimensions • Analytical Views"]
@@ -20,17 +27,18 @@ flowchart TB
     end
 
     %% =========================
-    %% STREAMING
+    %% STREAMING DATA ENGINEERING
     %% =========================
     subgraph STREAM["STREAMING DATA ENGINEERING"]
         G["Python Event Simulator<br/>event_simulator.py"]
         H["Azure Event Hubs<br/>Real-Time Event Ingestion"]
         I["Microsoft Fabric Eventstream<br/>Ingestion • Routing"]
-        J["Bronze (Streaming)<br/>Fabric Lakehouse • Delta Table<br/>Raw events only<br/>Eventstream → Lakehouse"]
+        J["Bronze (Streaming)<br/>Fabric Lakehouse • Delta Table<br/>Raw events only"]
         K["Silver (Streaming)<br/>PySpark Structured Streaming<br/>Clean • Validate • Deduplicate • Transform"]
         L["Streaming Gold<br/>PySpark Structured Streaming<br/>Near-Real-Time Aggregations • KPIs"]
 
-        G --> H --> I --> J --> K --> L
+        G --> H --> I
+        I --> J --> K --> L
     end
 
     %% =========================
@@ -40,14 +48,16 @@ flowchart TB
         M["Fabric Eventhouse / KQL<br/>Purpose-Built Real-Time Analytics"]
         N["Real-Time Event Analysis<br/>Interactive KQL Queries"]
 
-        I --> M --> N
+        M --> N
     end
 
+    I --> M
+
     %% =========================
-    %% SHARED PLATFORM
+    %% MICROSOFT FABRIC / ONELAKE
     %% =========================
     subgraph PLATFORM["MICROSOFT FABRIC / ONELAKE"]
-        O["OneLake<br/>Unified Data Storage Foundation"]
+        O["OneLake<br/>Unified Fabric Storage Foundation"]
         P["Fabric Lakehouse<br/>Medallion Architecture<br/>Bronze → Silver → Gold"]
     end
 
@@ -56,10 +66,11 @@ flowchart TB
     J -. "Delta Tables" .-> O
     K -. "Delta Tables" .-> O
     L -. "Delta Tables" .-> O
+
     O --> P
 
     %% =========================
-    %% ANALYTICS
+    %% ANALYTICS & CONSUMPTION
     %% =========================
     subgraph ANALYTICS["ANALYTICS & CONSUMPTION"]
         Q["Power BI Semantic Model<br/>Relationships • Measures • KPIs"]
@@ -81,22 +92,33 @@ flowchart TB
     G --> T
 
     %% =========================
-    %% GOVERNANCE / ENGINEERING
+    %% PROJECT ENGINEERING & DEVELOPMENT
     %% =========================
-    subgraph ENGINEERING["PLATFORM ENGINEERING & GOVERNANCE"]
-        U["Security<br/>Microsoft Entra ID • Access Control"]
+    subgraph ENGINEERING["PROJECT ENGINEERING & DEVELOPMENT"]
+        U["Security & Access Control<br/>Microsoft Entra ID"]
         V["Data Quality<br/>Validation Rules • Quality Checks • Business Rules"]
-        W["Monitoring<br/>Pipeline Status • Logs • Metrics • Processing Latency"]
-        X["CI/CD<br/>Git • GitHub Actions • Automated Validation"]
-        Y["Docker<br/>Containerization • Environment Variables • Volumes • Logging"]
+        W["Monitoring & Observability<br/>Pipeline Status • Logs • Metrics • Processing Latency"]
+        X["Continuous Integration (CI)<br/>Git • GitHub Actions • Automated Validation"]
+        Y["Docker<br/>Reproducible Python Environment<br/>Data Generation & Supporting Scripts"]
     end
+
+    %% =========================
+    %% SOURCE CODE & REPRODUCIBLE DATA GENERATION
+    %% =========================
+    subgraph REPO["SOURCE CODE & REPRODUCIBLE DATA GENERATION"]
+        Z["GitHub Repository<br/>Python Scripts • Configuration • Project Code"]
+    end
+
+    Z --> X
+    Z --> Y
+    Y --> A
 
     U -.-> PLATFORM
     V -.-> PLATFORM
     W -.-> PLATFORM
-    X -.-> PLATFORM
-    Y -.-> PLATFORM
 ```
+
+</div>
 
 ---
 
@@ -174,7 +196,7 @@ Public / Synthetic CSV Data
 Python Data Preparation
         │
         ▼
-Microsoft Fabric Data Factory
+Manual Upload to Fabric Lakehouse
         │
         ▼
 Bronze (Batch)
@@ -304,27 +326,42 @@ The Streaming Gold / Power BI experience includes real-time-oriented metrics suc
 
 ## 7. Platform Engineering & Governance
 
-Week 8 focuses on making the completed platform production-ready:
 
 ```text
-                    PRODUCTION READINESS
+                                 PROJECT ENGINEERING
                            │
-       ┌───────────────────┼───────────────────┐
-       │                   │                   │
-       ▼                   ▼                   ▼
- Pipeline             Monitoring          Data Quality
- Orchestration        & Observability     & Testing
-       │                   │                   │
-       └───────────────────┼───────────────────┘
+          ┌────────────────┼─────────────────┐
+          │                │                 │
+          ▼                ▼                 ▼
+      Orchestration    Monitoring       Data Quality
+                       & Observability    & Testing
+          │                │                 │
+          └────────────────┼─────────────────┘
                            │
-              ┌────────────┴────────────┐
-              │                         │
-              ▼                         ▼
-           Security                  CI/CD
-              │                         │
-              └────────────┬────────────┘
                            ▼
-                         Docker
+                       Security
+                           │
+                           ▼
+              Continuous Integration (CI)
+                       GitHub Actions
+
+
+              ┌───────────────────────────┐
+              │                           │
+              ▼                           ▼
+       GitHub Repository              Docker
+              │                           │
+              │                           ▼
+              │                  Reproducible Python
+              │                     Environment
+              │                           │
+              │                           ▼
+              │                  Data Generation &
+              │                  Supporting Scripts
+              │                           │
+              └──────────────────────────►│
+                                          ▼
+                                  Generated Data
 ```
 
 
@@ -336,7 +373,7 @@ Week 8 focuses on making the completed platform production-ready:
 | Technology | Primary Responsibility |
 |---|---|
 | Python | Dataset preparation, synthetic data generation, event simulation |
-| Microsoft Fabric Data Factory | Batch ingestion and orchestration |
+| Fabric Pipelines | Notebook orchestration for batch processing |
 | Azure Event Hubs | Real-time event ingestion |
 | Fabric Eventstream | Streaming ingestion, processing and routing |
 | Fabric Lakehouse | Central Bronze/Silver/Gold data-engineering environment |
@@ -350,7 +387,7 @@ Week 8 focuses on making the completed platform production-ready:
 | Semantic Model | Business relationships, measures and KPIs |
 | Power BI | Analytics, dashboards and business consumption |
 | Git / GitHub | Source control |
-| GitHub Actions | CI/CD and automated engineering checks |
+| GitHub Actions | Continuous Integration (CI) and automated engineering checks |
 | Docker | Reproducible containerized execution |
 ```
 
@@ -358,16 +395,18 @@ Week 8 focuses on making the completed platform production-ready:
 
 The platform demonstrates a unified enterprise-style data platform that supports both **batch data engineering and simulated real-time data engineering**.
 
-The primary data-engineering architecture is:
+The batch architecture uses manually uploaded source data and Fabric pipeline orchestration for the downstream notebook-based processing:
 
-**Sources → Fabric Data Factory / Eventstream → Lakehouse Bronze → Silver → Gold → Analytics**
+**Source Datasets → Manual Upload to Fabric Lakehouse → Bronze → Silver → Batch Gold → Fabric Warehouse → Power BI**
 
-The streaming path is:
+The streaming architecture is:
 
 **Event Simulator → Event Hubs → Eventstream → Bronze Streaming → PySpark Structured Streaming → Silver Streaming → PySpark Structured Streaming → Streaming Gold → Power BI**
 
-The same streaming events are also routed to:
+The same streaming events are also routed directly from Eventstream to:
 
 **Eventstream → Eventhouse / KQL → Real-Time Analytics**
+
+Together, these paths form the platform's unified batch and streaming architecture, with the Fabric Lakehouse providing the central medallion data-engineering environment.
 
 This architecture reflects the implementation completed during Week 7 and provides the foundation for the Week 8 production-readiness work.
