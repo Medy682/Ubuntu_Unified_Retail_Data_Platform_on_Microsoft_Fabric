@@ -1,4 +1,4 @@
-# 💎 Ubuntu Unified Retail Data Platform on Microsoft Fabric
+# 💎♦️💎  Ubuntu Unified Retail Data Platform on Microsoft Fabric
 
 [![Ubuntu Unified Data Platform CI](https://github.com/Medy682/Ubuntu_Unified_Retail_Data_Platform_on_Microsoft_Fabric/actions/workflows/platform-ci.yml/badge.svg)](https://github.com/Medy682/Ubuntu_Unified_Retail_Data_Platform_on_Microsoft_Fabric/actions/workflows/platform-ci.yml)
 
@@ -7,7 +7,7 @@
 
 ---
 
-👤 Author: Kidima Medy Masuka 
+# 👤 Author: Kidima Medy Masuka 
 
 Date: 2026
 
@@ -28,6 +28,12 @@ The platform combines:
 - **Automated repository validation** using GitHub Actions CI
 
 The architecture follows a **Medallion Architecture: Bronze → Silver → Gold**.
+
+---
+
+## 🔴 Ubuntu_Unified_Retail_Data_platform_Diagram
+
+![Ubuntu_Unified_Retail_Data_platform_Diagram](docs/Ubuntu_Unified_Retail_Data_platform_Diagram.png)
 
 ---
 
@@ -68,6 +74,76 @@ The architecture follows a **Medallion Architecture: Bronze → Silver → Gold*
                                                       ▼
                                                    Power BI
 ```
+
+
+---
+
+# 📸 Project Screenshots
+
+##  🛠️  Microsfot fabric/ OneLake
+
+### ⚡Fabric workspace
+
+![Microsoft Fabric Workspace](docs/Microsoft_Fabric_Workspace_01.png)
+![Microsoft Fabric Workspace](docs/Microsoft_Fabric_Workspace_02.png)
+
+### ⚡Microsoft Fabric Lakehouse
+
+![Microsoft Fabric Lakehouse](docs/Microsoft_Fabric_Lakehouse.png)
+
+### ⚡Pyspark notebooks
+
+![Bronze_Layer_Data_Ingestion1](docs/Bronze_Layer_Data_Ingestion1.png)
+![Silver_Layer_Data_Cleaning_Transformation_Validation1](docs/Silver_Layer_Data_Cleaning_Transformation_Validation1.png)
+![03_NB_Streaming_Silver_Transformation1](docs/03_NB_Streaming_Silver_Transformation1.png)
+![04_NB_Streaming_Gold_Transformation1](docs/04_NB_Streaming_Gold_Transformation1.png)
+
+### ⚡Microsoft Fabric warehouse
+
+![Gold_Layer_Warehouse_Dimensional_Model](docs/Gold_Layer_Warehouse_Dimensional_Model.png)
+
+### ⚡Microsoft Fabric Eventstream
+
+[▶️ Watch the Microsoft Fabric Eventstream Demo](docs/Events_streaming_Azure_eventhubs_github.mp4)
+
+![Fabric_Eventstream(lakehouse_eventHouse_routing](docs/Fabric_Eventstream(lakehouse_eventHouse_routing).png)
+![Fabric_Eventstream_Lakehouse_Ingestion](docs/Fabric_Eventstream_Lakehouse_Ingestion.png)
+![Fabric_Eventstream_Eventhouse_Ingestion](docs/Fabric_Eventstream_Eventhouse_Ingestion.png)
+
+### ⚡Microsoft Fabric Eventhouse/KQL databse
+
+![Retail_Realtime_intelligence.(Eventhouse)](docs/Retail_Realtime_intelligence.(Eventhouse).png)
+![KQL1](docs/KQL1.png)
+![KQL2](docs/KQL2.png)
+
+### ⚡Retail Batch Orchestration
+
+![Retail_Batch_Orchestration1s](docs/Retail_Batch_Orchestration1.png)
+
+### ⚡Docker
+
+![docker2.](docs/docker2.png)
+
+
+
+## ✨ Batch & streaming Power bi visuals 
+
+ ### 👉 Batch 
+
+![batch_brazilian_retail](docs/batch_brazilian_retail.png)
+
+![batch_european_retail](docs/batch_european_retail.png)
+
+
+### 👉 streaming
+
+![streaming_gold_analytics](docs/streaming_gold_analytics.png)
+
+![real_time_intelligence](docs/real_time_intelligence.png)
+
+---
+
+
 
 ### 👉 Fabric components
 
