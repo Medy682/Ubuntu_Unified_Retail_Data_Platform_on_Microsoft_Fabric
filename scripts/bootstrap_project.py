@@ -1,87 +1,113 @@
 from pathlib import Path
 
-# Root project folder
-PROJECT_NAME = "retail_data_platform_on_Microsoft_Azure"
 
+# ============================================================
+# Project configuration
+# ============================================================
+
+PROJECT_NAME = "Ubuntu_Unified_Retail_Data_Platform_on_Microsoft_fabric"
+
+
+# ============================================================
 # Folder structure
+# ============================================================
+
 folders = [
+    # GitHub
     ".github/workflows",
-    "infrastructure/terraform",
-    "infrastructure/architecture",
 
-    "data/batch",
-    "data/streaming",
-    "data/reference",
+    # Project architecture
+    "architecture",
 
-    "ingestion/connectors",
-    "ingestion/loaders",
-    "ingestion/config",
+    # Data
+    "data/Original_data",
 
-    "orchestration/dags",
-
-    "processing/bronze",
-    "processing/silver",
-    "processing/gold",
-    "processing/common",
-
-    "dbt/models",
-    "dbt/macros",
-    "dbt/tests",
-    "dbt/seeds",
-    "dbt/snapshots",
-
-    "warehouse",
-
-    "dashboards",
-
-    "monitoring",
-
-    "tests/unit",
-    "tests/integration",
-    "tests/data_quality",
-    "tests/performance",
-
-    "docs/architecture",
-    "docs/diagrams",
-    "docs/runbooks",
-    "docs/images",
-
+    # Docker
     "docker",
 
-    "config",
+    # Microsoft Fabric
+    "fabric/data_factory",
+    "fabric/lakehouse",
+    "fabric/notebooks",
+    "fabric/power_bi",
+    "fabric/warehouse",
 
-    "scripts"
+    # Documentation
+    "docs",
+
+    # Scripts
+    "scripts",
+
+    # Testing
+    "tests",
+
+    # Logs
+    "logs",
 ]
 
+
+# ============================================================
 # Files to create
+# ============================================================
+
 files = [
-    ".env.example",
+    # GitHub Actions
+    ".github/workflows/platform-ci.yml",
+
+    # Docker
+    "docker/Dockerfile",
+    "docker/docker-compose.yml",
+    "docker/entrypoint.sh",
+
+    # Project configuration
+    ".dockerignore",
     ".gitignore",
+    "LICENSE",
+    "Makefile",
     "README.md",
     "requirements.txt",
-    "docker-compose.yml",
-    "Makefile",
 
-    ".github/workflows/ci.yml",
-    ".github/workflows/cd.yml",
-    ".github/workflows/dbt_tests.yml",
-    ".github/workflows/security_scan.yml",
-
-    "dbt/dbt_project.yml",
+    # Scripts
+    "scripts/event_simulator.py",
+    "scripts/generate_sample_datasets.py",
+    "scripts/generate_reference_data.py",
+    "scripts/utilities.py",
 ]
+
+
+# ============================================================
+# Create project root
+# ============================================================
 
 root = Path(PROJECT_NAME)
 
+
+# ============================================================
 # Create folders
+# ============================================================
+
 for folder in folders:
     (root / folder).mkdir(parents=True, exist_ok=True)
 
+
+# ============================================================
 # Create files
+# ============================================================
+
 for file in files:
     file_path = root / file
     file_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Do not overwrite existing files
     if not file_path.exists():
         file_path.touch()
 
-print(f"\n✅ Repository '{PROJECT_NAME}' created successfully!")
+
+# ============================================================
+# Completion message
+# ============================================================
+
+print("\n" + "=" * 60)
+print("✅ Ubuntu Unified Retail Data Platform created successfully!")
+print("=" * 60)
+print(f"📁 Project directory: {root.resolve()}")
