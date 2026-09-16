@@ -104,7 +104,14 @@ The architecture follows a **Medallion Architecture: Bronze → Silver → Gold*
 
 ### ⚡Microsoft Fabric Eventstream
 
+![Live Azure Event Hubs Stream](docs/Events_streaming_Azure_eventhubs_live.png)
+
 [▶️ Watch the Microsoft Fabric Eventstream Demo](docs/Events_streaming_Azure_eventhubs_github.mp4)
+
+
+> 🎥 **Video:** The Eventstream demo is provided as an MP4 file.  
+> If the video does not play directly in GitHub, click the link above and select **Download raw file** to download and watch it locally.
+
 
 ![Fabric_Eventstream(lakehouse_eventHouse_routing](docs/Fabric_Eventstream(lakehouse_eventHouse_routing).png)
 ![Fabric_Eventstream_Lakehouse_Ingestion](docs/Fabric_Eventstream_Lakehouse_Ingestion.png)
