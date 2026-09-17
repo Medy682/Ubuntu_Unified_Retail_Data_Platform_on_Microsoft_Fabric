@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Streaming Gold layer is the business-oriented analytical layer of the streaming branch of the Ubuntu Retail Group unified retail data platform.
+The Streaming Gold layer is the business-oriented analytical layer of the streaming branch of the Ubuntu Unified Retail Data Platform.
 
 The platform follows a unified **Bronze → Silver → Gold Medallion Architecture** for both batch and streaming workloads. The Gold stage has two different implementations because batch and streaming data have different processing and latency requirements:
 
@@ -444,7 +444,7 @@ The Eventhouse path operates in parallel with the Lakehouse streaming path.
 
 # 15. Final Architecture Summary
 
-The Ubuntu Retail Group platform uses **one unified Medallion Architecture** across its batch and streaming data-engineering workloads.
+The Ubuntu Unified Retail Data Platform uses **one unified Medallion Architecture** across its batch and streaming data-engineering workloads.
 
 The architecture consists of:
 

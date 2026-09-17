@@ -1,5 +1,6 @@
 # Ubuntu Unified Retail Data Platform — Project Architecture
 
+
 ## 1. High-Level Architecture
 
 The following diagram represents the implemented project architecture, separating the **batch and streaming data paths** from the **project engineering and development tooling**.
@@ -122,6 +123,8 @@ flowchart TB
 
 ---
 
+
+
 ## 2. Streaming Architecture
 
 The implemented streaming path is:
@@ -223,6 +226,8 @@ Power BI
 ```
 
 ---
+
+
 
 ## 4. Medallion Architecture
 
@@ -408,4 +413,6 @@ The same streaming events are also routed directly from Eventstream to:
 **Eventstream → Eventhouse / KQL → Real-Time Analytics**
 
 Together, these paths form the platform's unified batch and streaming architecture, with the Fabric Lakehouse providing the central medallion data-engineering environment.
+
+
 

@@ -7,7 +7,7 @@
 
 ---
 
-# 👤 Author: Kidima Medy Masuka 
+## 👤 Author: Kidima Medy Masuka 
 
 Date: 2026
 
@@ -117,7 +117,7 @@ The architecture follows a **Medallion Architecture: Bronze → Silver → Gold*
 ![Fabric_Eventstream_Lakehouse_Ingestion](docs/Fabric_Eventstream_Lakehouse_Ingestion.png)
 ![Fabric_Eventstream_Eventhouse_Ingestion](docs/Fabric_Eventstream_Eventhouse_Ingestion.png)
 
-### ⚡Microsoft Fabric Eventhouse/KQL databse
+### ⚡Microsoft Fabric Eventhouse/KQL database
 
 ![Retail_Realtime_intelligence.(Eventhouse)](docs/Retail_Realtime_intelligence.(Eventhouse).png)
 ![KQL1](docs/KQL1.png)
@@ -418,7 +418,7 @@ Fabric notebooks, pipelines and other platform artefacts are maintained as part 
 | Analytics | Power BI, Semantic Models, Direct Lake |
 | Engineering | Docker, Git, GitHub Actions |
 | Storage Format | Delta Lake |
-| Methodology | Medallion Architecture, CRISP-DM |
+| Methodology | Medallion Architecture |
 
 ---
 
@@ -431,8 +431,8 @@ UBUNTU_UNIFIED_RETAIL_DATA_PLATFORM_ON_MICROSOFT_FABRIC/
 │   └── workflows/
 │       └── platform-ci.yml
 │
-├── config/
 │
+├── architecture/
 ├── data/
 │   └── Original_data/
 │
@@ -447,6 +447,7 @@ UBUNTU_UNIFIED_RETAIL_DATA_PLATFORM_ON_MICROSOFT_FABRIC/
 │   ├── data_factory/
 │   ├── lakehouse/
 │   ├── notebooks/
+│   ├── power_bi/
 │   └── warehouse/
 │
 ├── scripts/
@@ -455,6 +456,7 @@ UBUNTU_UNIFIED_RETAIL_DATA_PLATFORM_ON_MICROSOFT_FABRIC/
 │   ├── generate_reference_data.py
 │   └── utilities.py
 │
+├── .dockerignore
 ├── .gitignore
 ├── LICENSE
 ├── Makefile
@@ -559,3 +561,5 @@ This project was built for educational and portfolio purposes to demonstrate pra
 If reused or adapted, appropriate credit must be given to the author.
 
 📰 This project is part of my personal data science and analytics portfolio ✅
+
+
