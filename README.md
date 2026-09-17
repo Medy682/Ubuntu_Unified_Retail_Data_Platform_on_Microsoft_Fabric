@@ -125,9 +125,9 @@ The architecture follows a **Medallion Architecture: Bronze → Silver → Gold*
 
 ### ⚡Retail Batch Orchestration
 
-![Retail_Batch_Orchestration](docs/Retail_Batch_Orchestration.png)
 ![Retail_Batch_Orchestration1](docs/Retail_Batch_Orchestration1.png)
 ![Retail_Batch_Orchestration2](docs/Retail_Batch_Orchestration2.png)
+![Retail_Batch_Orchestration3](docs/Retail_Batch_Orchestration3.png)
 
 ### ⚡Docker
 
