@@ -1,0 +1,5 @@
+// 4. Purchases per Minute
+RetailStreamingEvents
+| where event_type == "purchase_success"
+| summarize PurchaseCount = count() by bin(event_timestamp, 1m)
+| order by event_timestamp asc

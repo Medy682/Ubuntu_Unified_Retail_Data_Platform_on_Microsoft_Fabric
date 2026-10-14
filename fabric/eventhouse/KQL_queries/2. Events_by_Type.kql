@@ -1,0 +1,4 @@
+// 2. Events by Type
+RetailStreamingEvents
+| summarize EventCount = count() by event_type
+| order by EventCount desc

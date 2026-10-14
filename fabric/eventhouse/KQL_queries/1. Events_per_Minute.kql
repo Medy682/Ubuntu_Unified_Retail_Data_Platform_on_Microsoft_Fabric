@@ -1,0 +1,4 @@
+// 1. Events per Minute
+RetailStreamingEvents
+| summarize EventCount = count() by bin(event_timestamp, 1m)
+| order by event_timestamp asc

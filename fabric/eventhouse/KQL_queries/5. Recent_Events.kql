@@ -1,0 +1,4 @@
+// 5. Recent Events
+RetailStreamingEvents
+| order by event_timestamp desc
+| take 20

@@ -1,0 +1,4 @@
+// 3. Events by Country
+RetailStreamingEvents
+| summarize EventCount = count() by country
+| order by EventCount desc
